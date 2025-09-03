@@ -39,11 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Custom App
     'ip_tracking',
+    # Third party app
+    'ipinfo_django',
+    # 'ratelimit'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'ipinfo_django.middleware.IPinfoMiddleware',
     'ip_tracking.middleware.IPTrackingMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -123,3 +127,26 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+IPINFO_API_KEY = 'fdfa6cfc53f93e'
+
+# Set cache options
+IPINFO_SETTINGS = {
+    'cache_options': {
+        'ttl': 24 * 60 * 60,  # 24 hours in seconds
+        'maxsize': 4096
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0' # If using Redis
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
