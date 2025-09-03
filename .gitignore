@@ -1,0 +1,4 @@
+venv/
+alx_backend_security/__pycache__/
+ip_tracking/__pycache__/
+ip_tracking/migrations/__pycache__/
