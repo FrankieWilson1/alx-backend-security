@@ -128,7 +128,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-IPINFO_API_KEY = 'fdfa6cfc53f93e'
+IPINFO_API_KEY = 'YOUR_IPINFO_API_KEY'
 
 # Set cache options
 IPINFO_SETTINGS = {
